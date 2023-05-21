@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Main
 {
-
+    // Create instances of required services and utilities
     public static void main( String[] args )
         throws ParseException
     {
@@ -21,8 +21,11 @@ public class Main
         int option = 0;
         do
         {
+            // Show the main menu and get user input
             PrinterHelper.showMainMenu();
             option = scanner.nextInt();
+
+            // Perform actions based on user's choice
             switch ( option )
             {
                 case 1:
@@ -48,21 +51,20 @@ public class Main
     private static void enrollStudentToCourse( StudentService studentService, CourseService courseService,
                                                Scanner scanner )
     {
-        System.out.println( "Insert student ID" );
+        System.out.println("Insert student ID:");
         String studentId = scanner.next();
-        Student student = studentService.findStudent( studentId );
-        if ( student == null )
-        {
-            System.out.println( "Invalid Student ID" );
+        Student student = studentService.findStudent(studentId);
+        if (student == null) {
+            System.out.println("Invalid Student ID");
             return;
         }
-        System.out.println( student );
-        System.out.println( "Insert course ID" );
+        System.out.println(student);
+
+        System.out.println("Insert course ID:");
         String courseId = scanner.next();
-        Course course = courseService.getCourse( courseId );
-        if ( course == null )
-        {
-            System.out.println( "Invalid Course ID" );
+        Course course = courseService.getCourse(courseId);
+        if (course == null) {
+            System.out.println("Invalid Course ID");
             return;
         }
         System.out.println( course );
@@ -101,7 +103,10 @@ public class Main
     private static void registerStudent( StudentService studentService, Scanner scanner )
         throws ParseException
     {
+        // Invoke the createStudentMenu method from PrinterHelper to register a new student
         Student student = PrinterHelper.createStudentMenu( scanner );
         studentService.subscribeStudent( student );
+        System.out.println("Student registered successfully.");
     }
 }
+

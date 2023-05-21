@@ -27,13 +27,23 @@ public class StudentService
     public void showSummary()
     {
         //TODO implement
+
+        // Iterate over all students and print their information
+        for (Student student : students.values()) {
+            System.out.println(student.getName() + " (ID: " + student.getId() + ")");
+            System.out.println("Approved Courses:");
+            for (Course course : student.getApprovedCourses()) {
+                System.out.println("- " + course.getName() + " (" + course.getCode() + ")");
+            }
+            System.out.println();
+        }
     }
 
     public void enrollToCourse( String studentId, Course course )
     {
-        if ( students.containsKey( studentId ) )
-        {
-            students.get( studentId ).enrollToCourse( course );
+        Student student = findStudent(studentId);
+        if (student != null) {
+            student.enrollToCourse(course);
         }
     }
 
